@@ -1,0 +1,49 @@
+{% extends "base.html.j2" %}
+{% block title %}
+Register
+{% endblock %}
+{% block content %}
+<h1> Registration </h1>
+    {{form.hidden_tag()}}
+
+    <div>
+  {{form.first_name.label(class="form-label")}}
+  {{form.first_name(class="form-control")}}
+  {% for error in form.first_name.errors %}
+    <small style="color:red;">{{error}}</small>
+  {% endfor %}
+  </div>
+  <br>
+  <div>
+  {{form.last_name.label(class="form-label")}}
+  {{form.last_name(class="form-control")}}
+  {% for error in form.last_name.errors %}
+    <small style="color:red;">{{error}}</small>
+  {% endfor %}
+  </div> 
+  <div>
+  {{form.email.label(class="form-label")}}
+  {{form.email(class="form-control")}}
+  {% for error in form.email.errors %}
+    <small style="color:red;">{{error}}</small>
+  {% endfor %}
+  </div>
+  <div>
+  {{form.username.label(class="form-label")}}
+  {{form.username(class="form-control")}}
+  {% for error in form.username.errors %}
+    <small style="color:red;">{{error}}</small>
+  {% endfor %}
+  </div>
+  <br>
+  <div>
+  {{form.password.label(class="form-label")}}
+  {{form.password(class="form-control")}}
+  {% for error in form.password.errors %}
+    <small style="color:red;">{{error}}</small>
+  {% endfor %}
+  </div>
+    <div>
+  {{form.submit(class="btn btn-primary form-control")}}
+  </div>
+{% endblock %}
