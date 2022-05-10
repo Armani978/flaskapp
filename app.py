@@ -1,4 +1,3 @@
-from app import app 
+from app import create_app 
 
-
-app.config['SECRET_KEY'] = 'any secret string'
+app=create_app()

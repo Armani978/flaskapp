@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div id="navbar"class="container-fluid">
+    <a class="navbar-brand" href="#"><a href="https://fontmeme.com/pokemon-font/"><img src="https://fontmeme.com/permalink/220508/99f9ef14aa7ac5b502a6251077702fba.png" alt="pokemon-font" border="0"></a></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        {% if current_user.is_authenticated%}
+        <a class="nav-link" href="{{url_for('auth.index')}}">Home</a>
+        <a class="nav-link" href="{{url_for('auth.poke')}}">Poké</a>
+        <a class="nav-link" href="{{url_for('auth.logout')}}">Logout</a>
+        {% else %}
+        <a class="nav-link" href="{{url_for('main.login')}}">Login</a>
+        <a class="nav-link" href="{{url_for('main.register')}}">Register</a>
+        {% endif %}
+        
+      </div>
+    </div>
+  </div>
+</nav>
