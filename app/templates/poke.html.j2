@@ -4,7 +4,7 @@ Poke
 {% endblock %}
 {% block content %}
 <h1>Poké</h1>
-<form action="{{url_for('poke')}}" method="POST">
+<form action="{{url_for('auth.poke')}}" method="POST">
   {{form.hidden_tag()}}
   <div>
   {{form.pokemon.label(class="form-label")}}
