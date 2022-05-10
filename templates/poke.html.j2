@@ -4,16 +4,20 @@ Poke
 {% endblock %}
 {% block content %}
 <h1>Poké</h1>
-<form action="/poke" method="POST">
-  <div class="mb-3">
-    <label for="pokemon" class="form-label">Pokemon</label>
-    <input type="text" name="pokemon" class="form-control" id="year">
+<form action="{{url_for('auth.poke')}}" method="POST">
+  {{form.hidden_tag()}}
+  <div>
+  {{form.pokemon.label(class="form-label")}}
+  {{form.pokemon(class="form-control")}}
+  {# {% for error in form.name.errors %}
+    <small style="color:red;">{{error}}</small>
+  {% endfor %} #}
   </div>
-  
-  <div style="color:red"><small>{{error}}</small></div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <div>
+  {{form.submit(class="btn btn-primary form-control")}}
+  </div>
 </form>
-{% if poke_stats %}
+
 <table class="table">
   <thead>
     <tr>
@@ -26,8 +30,8 @@ Poke
       <th scope="col">Defense Base Stat</th>
     </tr>
   </thead>
-  {%for stat in poke_stats%}
   <tbody>
+  {%for stat in pokes%}
     <tr>
       <th scope="row">{{stat['name']}}</th>
       <td>{{stat['name']}}</td>
@@ -40,7 +44,7 @@ Poke
     </tr>
     {%endfor%}
   </tbody>
-{%endif%}
 </table>
+
 
 {% endblock %}
