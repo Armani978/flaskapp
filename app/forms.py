@@ -1,20 +1,11 @@
 from flask_wtf import FlaskForm
-<<<<<<< Updated upstream
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
-=======
-from sqlalchemy import LABEL_STYLE_TABLENAME_PLUS_COL
 from wtforms import StringField, SubmitField, PasswordField, EmailField
 from wtforms.validators import DataRequired, Email, ValidationError, email_validator
 from .models import User
->>>>>>> Stashed changes
 
 class PokeForm(FlaskForm):
     pokemon = StringField('pokemon', validators=[DataRequired()])
     submit = SubmitField('Submit')
-<<<<<<< Updated upstream
-    
-=======
     
 class Login(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
@@ -39,4 +30,3 @@ class EditProfile(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     email = EmailField('Email Address', validators=[DataRequired(),Email()])
     submit = SubmitField('Submit')
->>>>>>> Stashed changes
