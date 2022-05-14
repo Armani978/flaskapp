@@ -4,9 +4,12 @@ from wtforms.validators import DataRequired, Email, ValidationError, email_valid
 from .models import User
 
 class PokeForm(FlaskForm):
-    pokemon = StringField('pokemon', validators=[DataRequired()])
+    pokemon = StringField(' ', validators=[DataRequired()])
     submit = SubmitField('Submit')
-    
+
+class CatchPokemon(FlaskForm):
+    submit=SubmitField('Add pokemon')
+
 class Login(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     email = EmailField('Email Address', validators=[DataRequired(),Email()])

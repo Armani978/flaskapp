@@ -8,6 +8,10 @@ class User(UserMixin, db.Model):
     last_name = db.Column(db.String)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
+    pokemen=db.relationship('Data',
+                    secondary='users_pokemon',
+                    backref='users',
+                    lazy='dynamic')
 
     def __repr__(self):
         return f'<User: {self.email} | {self.id}>'
@@ -31,6 +35,47 @@ class User(UserMixin, db.Model):
         db.session.add(self)
         db.session.commit()
 
+    def catch(self, pokemon):
+        self.pokemen.append(pokemon)
+        db.session.commit()
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+class Data(db.Model):
+    pokemon_id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String)
+    hp = db.Column(db.Integer)
+    ability = db.Column(db.String)
+    base_experience = db.Column(db.Integer)
+    front_shiny= db.Column(db.String)
+    attack_base_stat=db.Column(db.Integer)
+    defense_base_stat = db.Column(db.Integer)
+    
+    def __str__(self):
+        return f'{self.pokemon_id | self.name }'
+    
+
+    def poke_dict(self, pokemon):
+        self.name = pokemon['name']
+        self.hp = pokemon['hp']
+        self.ability = pokemon['ability']
+        self.base_experience = pokemon['base_experience']
+        self.attack_base_stat = pokemon['attack_base_stat']
+        self.defense_base_stat = pokemon['defense_base_stat']
+        self.front_shiny = pokemon['front_shiny']
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def catch(self, pokemon):
+        self.pokemen.append(pokemon)
+        db.session.commit()
+
+class UsersPokemon(db.Model):
+    pokemon_id = db.Column(db.Integer, db.ForeignKey('data.pokemon_id'),primary_key=True)
+    id = db.Column(db.Integer, db.ForeignKey('user.id'),primary_key=True)
+
+    def __repr__(self):
+        return f'<UsersPokemon: {self.pokemon_id} | {self.id}>'

@@ -1,50 +1,33 @@
 {% extends "base.html.j2" %}
 {% block title %}
-Poke
+Poke-Search
 {% endblock %}
 {% block content %}
-<h1>Poké</h1>
-<form action="{{url_for('auth.poke')}}" method="POST">
-  {{form.hidden_tag()}}
-  <div>
-  {{form.pokemon.label(class="form-label")}}
-  {{form.pokemon(class="form-control")}}
-  {# {% for error in form.name.errors %}
-    <small style="color:red;">{{error}}</small>
-  {% endfor %} #}
+  <h1>Poké-Search</h1>
+    <p> Search for a pokemon! </p>
+    <form action="{{url_for('auth.poke')}}" method="POST">
+
+    {{form.hidden_tag()}}
+      <div>
+
+      {{form.pokemon.label(class="form-label")}}
+      {{form.pokemon(class="form-control")}}
+  
   </div>
   <div>
   {{form.submit(class="btn btn-primary form-control")}}
   </div>
 </form>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Ability</th>
-      <th scope="col">Base Experience</th>
-      <th scope="col">Front Shiny</th>
-      <th scope="col">Attack Base Stat</th>
-      <th scope="col">HP Base Stat</th>
-      <th scope="col">Defense Base Stat</th>
-    </tr>
-  </thead>
-  <tbody>
-  {%for stat in pokes%}
-    <tr>
-      <th scope="row">{{stat['name']}}</th>
-      <td>{{stat['name']}}</td>
-      <td>{{stat['ability']}}</td>
-      <td>{{stat['base_experience']}}</td>
-      <td>{{stat['front_shiny']}}</td>
-      <td>{{stat['attack_base_stat']}}</td>
-      <td>{{stat['hp_base_stat']}}</td>
-      <td>{{stat['defense_base_stat']}}</td>
-    </tr>
-    {%endfor%}
-  </tbody>
-</table>
+
+{% if pokes %}
+{%include './includes/_catch.html.j2'%}
+{% endif %}
 
 
 {% endblock %}
+
+
+
+    
+ 

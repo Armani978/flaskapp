@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 login = LoginManager()
 db = SQLAlchemy()
-migrate = Migrate()
+migrate = Migrate(compare_type=True)
 
 def create_app(config_class=Config):
     app = Flask(__name__)
