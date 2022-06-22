@@ -8,6 +8,9 @@ class User(UserMixin, db.Model):
     last_name = db.Column(db.String)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
+    wins= db.Column(db.Integer, default=0)
+    losses = db.Column(db.Integer, default=0)
+    pokemen = db.relationship('Pokemon', backref='user', lazy='dynamic')
     pokemen=db.relationship('Data',
                     secondary='users_pokemon',
                     backref='users',
@@ -38,6 +41,29 @@ class User(UserMixin, db.Model):
     def catch(self, pokemon):
         self.pokemen.append(pokemon)
         db.session.commit()
+
+    def release(self, pokemon):
+        self.pokemen.remove(pokemon)
+        db.session.commit()
+
+    def get_pokemen(self):
+        return self.pokemen.all()
+
+    def pokemon_count(self):
+        return self.pokemen.count()
+    
+    def add_pokemon(self, pokemon):
+        self.pokemen.append(pokemon)
+        db.session.commit()
+
+    def show_users(self, email):
+        return User.query.filter_by(email=email).first()
+
+    def show_wins(self):
+        return self.wins
+
+    def show_losses(self):
+        return self.losses
 
 @login.user_loader
 def load_user(id):
@@ -73,9 +99,44 @@ class Data(db.Model):
         self.pokemen.append(pokemon)
         db.session.commit()
 
+    def add_pokemon(self, pokemon):
+        self.pokemen.append(pokemon)
+        db.session.commit()
+
 class UsersPokemon(db.Model):
     pokemon_id = db.Column(db.Integer, db.ForeignKey('data.pokemon_id'),primary_key=True)
     id = db.Column(db.Integer, db.ForeignKey('user.id'),primary_key=True)
 
     def __repr__(self):
         return f'<UsersPokemon: {self.pokemon_id} | {self.id}>'
+
+    def __str__(self):
+        return f'<UsersPokemon: {self.pokemon_id} | {self.id}>'
+    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    def add_pokemon(self, pokemon):
+        self.pokemen.append(pokemon)
+        db.session.commit()
+
+    def delete_pokemon(self, pokemon):
+        self.pokemen.remove(pokemon)
+        db.session.commit()
+
+    def delete_all_pokemon(self):
+        self.pokemen.clear()
+        db.session.commit()
+    
+    def get_pokemon(self):
+        return self.pokemen
+    
+    def get_pokemon_id(self):
+        return self.pokemon_id
+    
+    def get_user_id(self):
+        return self.id
+
+    def pokemon_count(self):
+        return len(self.pokemen)

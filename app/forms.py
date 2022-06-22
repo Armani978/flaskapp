@@ -8,6 +8,7 @@ class PokeForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class CatchPokemon(FlaskForm):
+    pokemon = StringField(' ', validators=[DataRequired()])
     submit=SubmitField('Add pokemon')
 
 class Login(FlaskForm):

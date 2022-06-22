@@ -1,0 +1,92 @@
+{% extends "base.html.j2" %}
+{% block title %}
+Pokemon Team
+{% endblock %}
+{% block content %}
+<p> Pokemon 1 </p>
+    <form action="{{url_for('auth.pokemon_team')}}" method="POST">
+
+    {{form.hidden_tag()}}
+      <div>
+
+      {{form.pokemon.label(class="form-label")}}
+      {{form.pokemon(class="form-control")}}
+  
+  </div>
+  <div>
+  {{form.submit(class="btn btn-primary form-control")}}
+  </div>
+</form>
+<p> Pokemon 2 </p>
+    <form action="{{url_for('auth.pokemon_team')}}" method="POST">
+
+    {{form.hidden_tag()}}
+      <div>
+
+      {{form.pokemon.label(class="form-label")}}
+      {{form.pokemon(class="form-control")}}
+  
+  </div>
+  <div>
+  {{form.submit(class="btn btn-primary form-control")}}
+  </div>
+</form>
+
+<p> Pokemon 3 </p>
+    <form action="{{url_for('auth.pokemon_team')}}" method="POST">
+
+    {{form.hidden_tag()}}
+      <div>
+
+      {{form.pokemon.label(class="form-label")}}
+      {{form.pokemon(class="form-control")}}
+  
+  </div>
+  <div>
+  {{form.submit(class="btn btn-primary form-control")}}
+  </div>
+</form>
+
+<p> Pokemon 4 </p>
+    <form action="{{url_for('auth.pokemon_team')}}" method="POST">
+
+    {{form.hidden_tag()}}
+      <div>
+
+      {{form.pokemon.label(class="form-label")}}
+      {{form.pokemon(class="form-control")}}
+  
+  </div>
+  <div>
+  {{form.submit(class="btn btn-primary form-control")}}
+  </div>
+</form>
+
+<p> Pokemon 5 </p>
+    <form action="{{url_for('auth.pokemon_team')}}" method="POST">
+
+    {{form.hidden_tag()}}
+      <div>
+
+      {{form.pokemon.label(class="form-label")}}
+      {{form.pokemon(class="form-control")}}
+  
+  </div>
+  <div>
+  {{form.submit(class="btn btn-primary form-control")}}
+  </div>
+</form>
+
+{% if pokes %}
+
+{%include './includes/_catch.html.j2'%}
+
+{% endif %}
+
+
+{% endblock %}
+
+
+
+    
+ 
